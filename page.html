@@ -1,0 +1,97 @@
+<HTML lang="ko">
+ <HEAD>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, 
+  maximum-scale=1.0, minimum-scale=1.0">
+  <TITLE> test_coc_page_OK</TITLE>
+<script type="text/javascript">
+current=0;
+que=["4","4","3","4","4","3","2","2","2","2","2","2","3"];
+answer = ["0","0","0","0","0","0","0","0","0","0","0","0", "0"];
+
+function set_event(){
+e1=document.getElementById("prev");
+e1.addEventListener("click",function(){
+if(current>0) {
+current=current-1;
+for(var i=0;i<que[current+1];i++){
+remove(i);
+}
+remove("page_btn");
+remove("next");
+remove("prev");
+create_page(current);
+}
+});
+e2=document.getElementById("next");
+e2.addEventListener("click",function(){
+if(current<12){
+ current=current+1;
+for(var i=0;i<que[current-1];i++){
+remove(i);
+}
+remove("page_btn");
+remove("next");
+remove("prev");
+create_page(current);
+}
+});
+}
+function create_page(cu){
+document.write("<p>");
+page_btn=document.createElement("input");
+page_btn.type="button";
+page_btn.id="page_btn";
+page_btn.value=cu+1+"페이지";
+document.body.appendChild(page_btn);
+document.write("</p>");
+for(var i=0;i<que[cu];i++){
+document.write("<p>");
+answer_btn(i);
+document.write("</p>");
+}
+document.write("<p>");
+prev_btn();
+next_btn();
+document.write("</p>");
+set_event();
+}
+
+function next_btn(){
+nbtn = document.createElement("input");
+  nbtn.type= "button";
+  nbtn.value= "다음";
+nbtn.id="next";
+  document.body.appendChild(nbtn);
+}
+function prev_btn(){
+pbtn = document.createElement("input");
+  pbtn.type= "button";
+  pbtn.value= "이전";
+pbtn.id="prev";
+  document.body.appendChild(pbtn);
+}
+
+ function answer_btn(i)
+ {
+  ibtn = document.createElement("input");
+  ibtn.type= "button";
+  ibtn.value= i;
+ibtn.id=i;
+  document.body.appendChild(ibtn);
+ }
+ function remove(id)
+ { 
+  aaa = document.getElementById(id);
+  document.body.removeChild(aaa);
+ }
+</script>
+</HEAD>
+ <BODY>
+<script>
+window.onload=function(){
+create_page(current);
+};
+</script>
+ </BODY>
+</HTML>
